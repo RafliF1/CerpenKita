@@ -25,11 +25,10 @@ include 'config.php';
             <nav>
                 <ul class="navbar">
                     <li><a href="index.php">Beranda</a></li>
-                    <li><a href="user_request.php">Request Cerita</a></li>
+                    <li><a href="user_request.php">Saran dan Req</a></li>
                     <?php if (isset($_SESSION['admin'])): ?>
-                    <li><a href="tentang_kontak.php">Edit Cerita</a></li>
-                    <li><a href="admin_request.php">Admin Requests</a></li>
-                    <li><a href="tambah.php">Tambah Cerita</a></li>
+                    <li><a href="fituradmin.php">Cerita</a></li>
+                    <li><a href="admin_request.php">InboxAdmin</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>

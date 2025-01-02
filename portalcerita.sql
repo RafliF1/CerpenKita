@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Des 2024 pada 14.41
+-- Waktu pembuatan: 02 Jan 2025 pada 05.47
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -65,19 +65,29 @@ INSERT INTO `cerita` (`id`, `judul`, `deskripsi`, `konten`, `kategori`, `penulis
 (2, 'Perjalanan Seorang Relawan di Tengah Bencana', 'Test', 'Pada bulan September 2021, Indonesia dilanda bencana alam yang cukup parah. Gempa bumi berkekuatan 6,2 skala Richter mengguncang pulau Sulawesi, menyebabkan kerusakan yang meluas dan mengakibatkan banyak korban jiwa. Di tengah kepanikan dan kesedihan, banyak relawan dari berbagai daerah bergegas menuju lokasi bencana untuk memberikan bantuan.\r\n\r\nSalah satu relawan tersebut adalah Rina, seorang mahasiswi jurusan Kesehatan Masyarakat di sebuah universitas di Jakarta. Rina merasa terpanggil untuk membantu setelah melihat berita tentang bencana tersebut di televisi. Ia segera mendaftar sebagai relawan melalui organisasi kemanusiaan yang sudah berpengalaman dalam penanganan bencana.\r\n\r\nSetelah beberapa hari persiapan, Rina dan timnya berangkat menuju Sulawesi. Dalam perjalanan, ia merasakan campuran antara kegembiraan dan kecemasan. Kegembiraan karena bisa membantu sesama, tetapi juga kecemasan tentang apa yang akan mereka hadapi di lokasi bencana.\r\n\r\nSetibanya di lokasi, Rina terkejut melihat pemandangan yang sangat memilukan. Banyak rumah yang hancur, jalanan yang terputus, dan orang-orang yang kehilangan tempat tinggal. Rina dan timnya segera dibagi menjadi beberapa kelompok. Tugas Rina adalah memberikan bantuan medis dan psikologis kepada para korban.\r\n\r\nHari-hari pertama di lokasi bencana sangat melelahkan. Rina dan timnya bekerja tanpa henti, memberikan pertolongan pertama kepada korban yang terluka, mendistribusikan makanan dan air bersih, serta mendirikan tenda sebagai tempat berlindung. Rina juga berusaha mendengarkan cerita-cerita dari para korban, memberikan dukungan emosional kepada mereka yang kehilangan orang terkasih.\r\n\r\nSalah satu pengalaman yang paling mengesankan bagi Rina adalah saat ia bertemu dengan seorang ibu bernama Siti. Siti kehilangan suaminya dalam gempa dan kini harus merawat dua anaknya yang masih kecil. Rina melihat betapa hancurnya hati Siti, tetapi juga melihat semangatnya untuk tetap kuat demi anak-anaknya. Rina menghabiskan waktu berbicara dengan Siti, mendengarkan keluh kesahnya, dan memberikan semangat.\r\n\r\n\"Bu, saya tahu ini sangat sulit, tetapi Anda tidak sendirian. Kami di sini untuk membantu,\" kata Rina dengan tulus.\r\n\r\nSiti menatap Rina dengan mata penuh haru. \"Terima kasih, Nak. Kehadiranmu membuatku merasa tidak sendirian.\"\r\n\r\nSetelah beberapa minggu di lokasi bencana, Rina merasakan perubahan dalam dirinya. Ia belajar banyak tentang ketahanan manusia dan kekuatan komunitas. Meskipun banyak yang kehilangan segalanya, mereka tetap saling mendukung dan membantu satu sama lain. Rina juga menyadari betapa pentingnya peran relawan dalam situasi seperti ini.\r\n\r\nKetika akhirnya Rina kembali ke Jakarta, ia membawa pulang lebih dari sekadar pengalaman. Ia membawa pulang pelajaran berharga tentang empati, keberanian, dan harapan. Rina bertekad untuk terus terlibat dalam kegiatan kemanusiaan, tidak hanya saat bencana terjadi, tetapi juga dalam upaya pencegahan dan pemulihan.\r\n\r\nPengalaman Rina di Sulawesi mengubah pandangannya tentang kehidupan. Ia menyadari bahwa setiap orang memiliki cerita dan perjuangan masing-masing. Dan meskipun dunia sering kali dipenuhi dengan kesedihan, ada selalu harapan dan kekuatan dalam kebersamaan. Rina berjanji untuk menjadi suara bagi mereka yang tidak terdengar dan untuk terus berkontribusi dalam menciptakan dunia yang lebih baik.', 'non-fiksi', 0, 'uploads/NoImages.png'),
 (3, 'Test', 'Test', 'Example', 'horor', 0, 'uploads/NoImages.png'),
 (4, 'Test', 'Example', 'Test', 'romansa', 0, 'uploads/NoImages.png'),
-(5, 'Test', 'Example', 'Test', 'fantasi', 0, 'uploads/NoImages.png');
+(5, 'Test', 'Example', 'Test', 'fantasi', 0, 'uploads/NoImages.png'),
+(6, 'Test', 'Test1', 'Testtest', 'fiksi', 0, 'uploads/NoImages.png');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penulis`
+-- Struktur dari tabel `user_requests`
 --
 
-CREATE TABLE `penulis` (
+CREATE TABLE `user_requests` (
   `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `biografi` text DEFAULT NULL
+  `email` varchar(255) NOT NULL,
+  `pesan` text NOT NULL,
+  `tanggal_request` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `user_requests`
+--
+
+INSERT INTO `user_requests` (`id`, `nama`, `email`, `pesan`, `tanggal_request`) VALUES
+(1, 'Sata', 'QR@qwe', 'qrwqrqwr', '2025-01-01 11:23:31');
 
 --
 -- Indexes for dumped tables
@@ -97,9 +107,9 @@ ALTER TABLE `cerita`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `penulis`
+-- Indeks untuk tabel `user_requests`
 --
-ALTER TABLE `penulis`
+ALTER TABLE `user_requests`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -116,13 +126,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT untuk tabel `cerita`
 --
 ALTER TABLE `cerita`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `penulis`
+-- AUTO_INCREMENT untuk tabel `user_requests`
 --
-ALTER TABLE `penulis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

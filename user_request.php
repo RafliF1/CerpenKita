@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <div class="form-container">
-    <h2>Request Cerita atau Fitur Baru</h2>
+    <h2>Saran dan Request</h2>
     <form method="post" action="user_request.php">
         <label for="nama">Nama:</label>
         <input type="text" id="nama" name="nama" required>
