@@ -5,7 +5,6 @@ include 'header.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $judul = $_POST['judul'];
-    $penulis = $_POST['penulis']; // Asumsikan penulis diambil dari form, atau bisa juga dari session
     $kategori = $_POST['kategori'];
     $deskripsi = $_POST['deskripsi'];
     $konten = $_POST['konten'];
@@ -33,12 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Simpan file gambar ke server
                     if (move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
                         // Simpan data cerita ke database
-                        $sql = "INSERT INTO cerita (judul, penulis_id, kategori, deskripsi, konten, gambar) VALUES (?, ?, ?, ?, ?, ?)";
+                        $sql = "INSERT INTO cerita (judul, kategori, deskripsi, konten, gambar) VALUES (?, ?, ?, ?, ?)";
                         $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("sissss", $judul, $penulis, $kategori, $deskripsi, $konten, $target_file);
+                        $stmt->bind_param("sssss", $judul, $kategori, $deskripsi, $konten, $target_file);
                         
                         if ($stmt->execute()) {
-                            header('Location: index.php');
+                            header('Location: admin_fitur.php');
                             exit;
                         } else {
                             echo "Error: " . $stmt->error;
@@ -78,9 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="judul">Judul</label>
             <input type="text" id="judul" name="judul" required>
 
-            <label for="penulis">Penulis</label>
-            <input type="text" id="penulis" name="penulis" required> <!-- Atau bisa diambil dari session -->
-
             <label for="kategori">Kategori</label>
             <select id="kategori" name="kategori" required>
                 <option value="fiksi">Fiksi</option>
@@ -101,15 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="form-actions">
                 <button type="submit" class="btn">Tambah</button>
-                <a href="index.php" class="btn btn-cancel">Kembali</a>
+                <a href="admin_fitur.php" class="btn btn-cancel">Kembali</a>
             </div>
         </form>
     </div>
-
-    <footer>
-        <p>&copy; 2024 Portal Cerita Pendek. All rights reserved.</p>
-    </footer>
 </body>
 
 </html>
-<?php $conn->close(); ?>

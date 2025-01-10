@@ -81,6 +81,4 @@ if (!$cerita) {
 </html>
 <?php
 include 'footer.php';
-$stmt->close();
-$conn->close();
 ?>

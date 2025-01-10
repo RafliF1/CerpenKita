@@ -3,7 +3,7 @@ include 'config.php';
 include 'header.php';
 
 $id = $_GET['id'];
-$sql = "SELECT judul, penulis_id, kategori, deskripsi, konten, gambar FROM cerita WHERE id = ?";
+$sql = "SELECT judul, kategori, deskripsi, konten, gambar FROM cerita WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -12,7 +12,6 @@ $cerita = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $judul = $_POST['judul'];
-    $penulis = $_POST['penulis'];
     $kategori = $_POST['kategori'];
     $deskripsi = $_POST['deskripsi'];
     $konten = $_POST['konten'];
@@ -30,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    $sql = "UPDATE cerita SET judul = ?, penulis_id = ?, kategori = ?, deskripsi = ?, konten = ?, gambar = ? WHERE id = ?";
+    $sql = "UPDATE cerita SET judul = ?, kategori = ?, deskripsi = ?, konten = ?, gambar = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissssi", $judul, $penulis, $kategori, $deskripsi, $konten, $gambar, $id);
+    $stmt->bind_param("sssssi", $judul, $kategori, $deskripsi, $konten, $gambar, $id);
 
     if ($stmt->execute()) {
-        header('Location: index.php');
+        header('Location: admin_fitur.php');
         exit;
     } else {
         echo "Error: " . $stmt->error;
@@ -59,10 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="judul">Judul</label>
             <input type="text" id="judul" name="judul" value="<?= htmlspecialchars($cerita['judul']) ?>" required>
 
-            <label for="penulis">Penulis</label>
-            <input type="text" id="penulis" name="penulis" value="<?= htmlspecialchars($cerita['penulis_id']) ?>"
-                required>
-
             <label for="kategori">Kategori</label>
             <select id="kategori" name="kategori" required>
                 <option value="fiksi" <?= $cerita['kategori'] == 'fiksi' ? 'selected' : '' ?>>Fiksi</option>
@@ -84,14 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="form-actions">
                 <button type="submit" class="btn">Update</button>
-                <a href="index.php" class="btn btn-cancel">Kembali</a>
+                <a href="admin_fitur.php" class="btn btn-cancel">Kembali</a>
             </div>
         </form>
     </div>
-
-    <footer>
-        <p>&copy; 2024 Portal Cerita Pendek. All rights reserved.</p>
-    </footer>
 </body>
 
 </html>

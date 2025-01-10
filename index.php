@@ -20,20 +20,6 @@ $sql = "SELECT id, judul, kategori, deskripsi, gambar FROM cerita LIMIT $cerita_
 $result = $conn->query($sql);
 ?>
 
-<!-- Form Pencarian -->
-<div class="search-container">
-    <form action="search.php" method="get" class="search-form">
-        <input type="text" name="query" class="search-input" placeholder="Cari cerita...">
-        <select name="kategori" class="search-select">
-            <option value="">Semua Kategori</option>
-            <option value="fiksi">Fiksi</option>
-            <option value="non-fiksi">Non-Fiksi</option>
-            <option value="misteri">Misteri</option>
-            <option value="romantis">Romantis</option>
-        </select>
-        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-    </form>
-</div>
 
 <div class="cerita-grid">
     <?php if ($result->num_rows > 0): ?>
@@ -54,7 +40,6 @@ $result = $conn->query($sql);
     <p>Tidak ada cerita.</p>
     <?php endif; ?>
 </div>
-
 <!-- Bagian Paginasi -->
 <div class="pagination">
     <?php if ($page > 1): ?>
@@ -70,7 +55,8 @@ $result = $conn->query($sql);
     <?php endif; ?>
 </div>
 
+
 <?php
 include 'footer.php';
-$conn->close();
+$conn->close(); 
 ?>

@@ -1,6 +1,5 @@
-</div>
 <footer>
-    <p>&copy; 2024 Portal Cerita Pendek. All rights reserved.</p>
+    <p>&copy; 2025 Mahasiswa FTI. Unisba Blitar</p>
 </footer>
 </body>
 

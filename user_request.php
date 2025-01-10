@@ -7,18 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama = $_POST['nama'];
     $email = $_POST['email'];
     $pesan = $_POST['pesan'];
-
     // Simpan request ke database
     $sql = "INSERT INTO user_requests (nama, email, pesan) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sss", $nama, $email, $pesan);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Request berhasil dikirim!'); window.location.href='user_request.php';</script>";
-    } else {
-        echo "<script>alert('Terjadi kesalahan. Silakan coba lagi.'); window.location.href='user_request.php';</script>";
-    }
-
+    $stmt->execute();
     $stmt->close();
 }
 ?>
@@ -28,13 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <form method="post" action="user_request.php">
         <label for="nama">Nama:</label>
         <input type="text" id="nama" name="nama" required>
-
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
-
         <label for="pesan">Pesan:</label>
         <textarea id="pesan" name="pesan" rows="5" required></textarea>
-
         <button type="submit" class="btn">Kirim Request</button>
     </form>
 </div>
